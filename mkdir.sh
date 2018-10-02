@@ -2,10 +2,12 @@
 
 output=$1
 IFS=$'\n'       # make newlines the only separator
-set -f          # disable globbingi
+set -f          # disable globbing
 
 
 for i in $(cat < dirname.list); do
-	  mkdir "$output"/"$i"
-  done
+
+	  dir_name=$(echo "$i" | cut -f2 -d":")
+	  mkdir "$output"/"$dir_name"
+done
 
