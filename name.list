@@ -1,9 +1,9 @@
 注册之前:before-register
-注册:regiister
+注册:register
 注册之后:after-register
 登录:login
 找回密码:reset-password
-注册/登录时遇到问题？:account-help
+注册或登录时遇到问题？:account-help
 客户端:client
 板块，主题与回复:content
 排版文字:typesetting
