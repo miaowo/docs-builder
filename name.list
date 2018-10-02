@@ -1,5 +1,5 @@
-#注册之前:before-register
-#注册:regiister
+注册之前:before-register
+注册:regiister
 注册之后:after-register
 登录:login
 找回密码:reset-password
