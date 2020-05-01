@@ -1,3 +1,3 @@
 # docs-script
 
-Some bash scripts for for initializing document file tree.
+Bash scripts for initializing document file tree.
