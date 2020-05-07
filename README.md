@@ -1,3 +1,5 @@
 # docs-script
 
-Bash scripts for initializing document file tree.
+### Static page generator for docs.miaowo.org
+
+
