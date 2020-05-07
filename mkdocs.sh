@@ -59,7 +59,8 @@ buildDocs() {
 			{ print line } } \
 	       else { print $0 }}' \
 		       < "$dir"/build_resources/template.html \
-		       > CONTENT_RENDERED.tmp
+		       > CONTENT_RENDERED.tmp \
+		       && rm tmp.snip
 
 	cp "$dir"/source/"$dir_name"/"$dir_name".footer.html tmp.footer
 	awk '{ if ( /SECTION_FOOTER/ )\
@@ -67,7 +68,9 @@ buildDocs() {
 			{ print line } } \
 	       else { print $0 }}' \
 		       < CONTENT_RENDERED.tmp \
-		       > index.html && rm CONTENT_RENDERED.tmp
+		       > index.html \
+		       && rm tmp.footer \
+		       && rm CONTENT_RENDERED.tmp
 
 	# Render DISPLAY_NAME
 	sed -i -e "s/DISPLAY_NAME/$display_name/g" index.html
