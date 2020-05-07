@@ -41,11 +41,7 @@ done < build_resources/name.list
 
 buildDocs() {
 
-	echo -n '中文名：' 
-	echo "$display_name"
-
-	echo -n '目录名：' 
-	echo "$dir_name"
+	echo "$display_name" '->' "$dir_name"
 
 	# Render SECTION_CONTENT
 
