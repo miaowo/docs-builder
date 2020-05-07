@@ -5,7 +5,7 @@ set -f          # disable globbing
 
 output="$1"
 
-mkInitDocs() {
+buildDocs() {
 
 	final_html="$output"/docs/"$dir_name"/index.html
 
@@ -56,7 +56,7 @@ for i in $(cat < build_resources/name.list); do
 
 	# Anything starts with `#` is comment
 	if [[ "$(firstChar)" != '#' ]]; then
-	      	mkInitDocs
+	      	buildDocs
 	fi
 done
 }
