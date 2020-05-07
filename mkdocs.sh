@@ -3,10 +3,11 @@
 IFS=$'\n'       # make newlines the only separator
 set -f          # disable globbing
 
-output="$1"
+output=deploy
 
 main() {
 
+mkdir $output 2> /dev/null
 mkDocsDir
 
 cp -r ./build_resources/lib/{css,fonts,js,icons} "$output"/
