@@ -31,7 +31,20 @@ firstChar() {
 }
 
 
+mkDocsDir() {
+
+for i in $(cat < build_resources/name.list); do
+
+	  dir_name=$(echo "$i" | cut -f2 -d":")
+	  mkdir -p "$output"/docs/"$dir_name"
+done
+
+}
+
+
 main() {
+
+mkDocsDir
 
 cp -r ./build_resources/lib/{css,fonts,js,icons} "$output"/
 cp ./build_resources/{favicon.ico,index.html} "$output"/
