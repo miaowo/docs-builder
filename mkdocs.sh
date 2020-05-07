@@ -34,7 +34,7 @@ firstChar() {
 main() {
 
 cp -r ./build_resources/lib/{css,fonts,js,icons} "$output"/
-cp ./build_resources/favicon.ico "$output"/
+cp ./build_resources/{favicon.ico,index.html} "$output"/
 
 for i in $(cat < build_resources/name.list); do
 
