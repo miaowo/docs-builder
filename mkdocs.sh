@@ -29,15 +29,22 @@ firstChar() {
 	echo "$i" | cut -c 1 
 }
 
+
+main() {
+
+cp -r ./lib/{css,fonts,js,icons} "$output"/
+	
 for i in $(cat < name.list); do
 
 	display_name=$(echo "$i" | cut -f1 -d":")
 	dir_name=$(echo "$i" | cut -f2 -d":")
 
+	# Anything starts with `#` is comment
 	if [[ "$(firstChar)" != '#' ]]; then
 	      	mkInitDocs
 	fi
 done
+}
 
-
+main
 
