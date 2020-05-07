@@ -7,6 +7,7 @@ output="$1"
 
 mkInitDocs() {
 
+	final_html="$output"/docs/"$dir_name"/index.html
 
 	echo -n '中文名：' 
 	echo "$display_name"
@@ -14,13 +15,13 @@ mkInitDocs() {
 	echo -n '目录名：' 
 	echo "$dir_name"
 	
-	cp template.html  "$output"/"$dir_name"/index.html
+	cp build_resources/template.html  "$final_html"
 
-	sed -i -e "s/DISPLAY_NAME/$display_name/g" "$output"/"$dir_name"/index.html 
+	sed -i -e "s/DISPLAY_NAME/$display_name/g" "$final_html"
 
 	# Add mdui-list-item-active class to selected item
 
-	sed -i -e 's|<a href="../'$dir_name'" class="mdui-list-item mdui-ripple">|<a href="../'$dir_name'" class="mdui-list-item mdui-ripple mdui-list-item-active">|g' "$output"/"$dir_name"/index.html 
+	sed -i -e 's|<a href="../'$dir_name'" class="mdui-list-item mdui-ripple">|<a href="../'$dir_name'" class="mdui-list-item mdui-ripple mdui-list-item-active">|g' "$final_html" 
 
 }
 
@@ -32,9 +33,9 @@ firstChar() {
 
 main() {
 
-cp -r ./lib/{css,fonts,js,icons} "$output"/
-	
-for i in $(cat < name.list); do
+cp -r ./build_resources/lib/{css,fonts,js,icons} "$output"/
+
+for i in $(cat < build_resources/name.list); do
 
 	display_name=$(echo "$i" | cut -f1 -d":")
 	dir_name=$(echo "$i" | cut -f2 -d":")

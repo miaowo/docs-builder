@@ -5,9 +5,9 @@ IFS=$'\n'       # make newlines the only separator
 set -f          # disable globbing
 
 
-for i in $(cat < name.list); do
+for i in $(cat < build_resources/name.list); do
 
 	  dir_name=$(echo "$i" | cut -f2 -d":")
-	  mkdir "$output"/"$dir_name"
+	  mkdir -p "$output"/docs/"$dir_name"
 done
 
