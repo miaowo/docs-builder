@@ -73,8 +73,7 @@ buildDocs() {
 	sed -i -e "s/DISPLAY_NAME/$display_name/g" index.html
 
 	# Add mdui-list-item-active class to selected item
-	sed -i -e 's|<a href="../$dir_name" class="mdui-list-item mdui-ripple">|<a href="../"$dir_name"" class="mdui-list-item mdui-ripple mdui-list-item-active">|g' index.html
-
+	sed -i -e 's|<a href="../'$dir_name'" class="mdui-list-item mdui-ripple">|<a href="../'$dir_name'" class="mdui-list-item mdui-ripple mdui-list-item-active">|g' index.html
         cd "$dir" || exit
 	
 }
