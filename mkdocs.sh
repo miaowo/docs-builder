@@ -59,13 +59,21 @@ buildDocs() {
 			{ print line } } \
 	       else { print $0 }}' \
 		       < "$dir"/build_resources/template.html \
-		       > index.html && rm tmp.snip
+		       > CONTENT_RENDERED.tmp
+
+	cp "$dir"/source/"$dir_name"/"$dir_name".footer.html tmp.footer
+	awk '{ if ( /SECTION_FOOTER/ )\
+		{ while(( getline line<"tmp.footer") > 0) \
+			{ print line } } \
+	       else { print $0 }}' \
+		       < CONTENT_RENDERED.tmp \
+		       > index.html && rm CONTENT_RENDERED.tmp
 
 	# Render DISPLAY_NAME
 	sed -i -e "s/DISPLAY_NAME/$display_name/g" index.html
 
 	# Add mdui-list-item-active class to selected item
-	sed -i -e 's|<a href="../'$dir_name'" class="mdui-list-item mdui-ripple">|<a href="../"$dir_name"" class="mdui-list-item mdui-ripple mdui-list-item-active">|g' index.html
+	sed -i -e 's|<a href="../$dir_name" class="mdui-list-item mdui-ripple">|<a href="../"$dir_name"" class="mdui-list-item mdui-ripple mdui-list-item-active">|g' index.html
 
         cd "$dir" || exit
 	
