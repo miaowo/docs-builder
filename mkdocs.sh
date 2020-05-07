@@ -12,55 +12,69 @@ mkDocsDir
 cp -r ./build_resources/lib/{css,fonts,js,icons} "$output"/
 cp ./build_resources/{favicon.ico,index.html} "$output"/
 
-for i in $(cat < build_resources/name.list); do
+while read LINE
+do
+	display_name=$(echo "$LINE" | cut -f1 -d":")
+	dir_name=$(echo "$LINE" | cut -f2 -d":")
 
-	display_name=$(echo "$i" | cut -f1 -d":")
-	dir_name=$(echo "$i" | cut -f2 -d":")
+	# Anything starts with `#` or space will be ignored
 
-	# Anything starts with `#` will be ignored  
-	if [[ "$(firstChar)" != '#' ]]; then
+	firstChar() {
+	echo "$LINE" | cut -c 1
+	}
+	if [[ "$(firstChar)" != '#' && "$(firstChar)" != ' ' ]]; then
 	      	buildDocs
 	fi
-done
+
+done < build_resources/name.list
+}
+
+mkDocsDir() {
+
+while read LINE
+do
+	  dir_name=$(echo "$LINE" | cut -f2 -d":")
+	  mkdir -p "$output"/docs/"$dir_name"
+done < build_resources/name.list
 }
 
 buildDocs() {
-
-	final_html="$output"/docs/"$dir_name"/index.html
 
 	echo -n '中文名：' 
 	echo "$display_name"
 
 	echo -n '目录名：' 
 	echo "$dir_name"
-	
-	cp build_resources/template.html  "$final_html"
+
+	# Render SECTION_CONTENT
+
+	# It's hard to use shell variable inside a inline awk program, 
+	# therefore we have to use `cd` here.
+
+	dir=$(pwd)
+	cd "$output"/docs/"$dir_name" || exit
+
+	"$dir"/build_resources/bin/Markdown.pl \
+		"$dir"/source/"$dir_name"/"$dir_name".md > tmp.snip
+
+	awk '{ if ( /SECTION_CONTENT/ )\
+	       	{ while(( getline line<"tmp.snip") > 0) \
+			{ print line } } \
+	       else { print $0 }}' \
+		       < "$dir"/build_resources/template.html \
+		       > index.html && rm tmp.snip
 
 	# Render DISPLAY_NAME
-	sed -i -e "s/DISPLAY_NAME/$display_name/g" "$final_html"
+	sed -i -e "s/DISPLAY_NAME/$display_name/g" index.html
 
 	# Add mdui-list-item-active class to selected item
-	sed -i -e 's|<a href="../'$dir_name'" class="mdui-list-item mdui-ripple">|<a href="../'\
-		$dir_name'" class="mdui-list-item mdui-ripple mdui-list-item-active">|g'\
-	       	"$final_html" 
+	sed -i -e 's|<a href="../'$dir_name'" class="mdui-list-item mdui-ripple">|<a href="../"$dir_name"" class="mdui-list-item mdui-ripple mdui-list-item-active">|g' index.html
 
-}
-
-firstChar() {
+        cd "$dir" || exit
 	
-	echo "$i" | cut -c 1 
 }
 
 
-mkDocsDir() {
-
-for i in $(cat < build_resources/name.list); do
-
-	  dir_name=$(echo "$i" | cut -f2 -d":")
-	  mkdir -p "$output"/docs/"$dir_name"
-done
-
-}
 
 main
 
