@@ -45,7 +45,7 @@ buildDocs() {
 
 	# Render SECTION_CONTENT
 
-	# It's hard to use shell variable inside a inline awk program, 
+	# It's hard to use shell variable inside an inline awk program, 
 	# therefore we have to use `cd` here.
 
 	dir=$(pwd)
