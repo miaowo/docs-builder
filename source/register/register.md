@@ -76,15 +76,20 @@
 	<div class="mdui-row">
 	<div class="mdui-col-md-7">
 
-		<a href="https://www.miaowo.org/register/" class="mdui-btn-block mdui-btn mdui-m-b-3 mdui-btn-raised mdui-ripple mdui-color-theme-accent">前往注册页面</a>
+		<a href="../pause-register/" class="mdui-btn-block mdui-btn mdui-m-b-3 mdui-btn-raised mdui-ripple mdui-color-theme-accent">前往注册页面</a>
 
 	</div>
 	</div>
 
 	<p>一切顺利的话，点击注册后你就会被重定向到喵窝主页，现在你可以使用喵窝的所有功能了～</p>
 
+	<div class="mdui-row">
+	<div class="mdui-col-md-7">
+
 		<a href="../account-help/" class="mdui-btn-block mdui-btn mdui-m-b-3 mdui-btn-raised mdui-ripple mdui-color-theme-accent">注册或登录时遇到问题？</a>
 
+	</div>
+	</div>
 
 	<p>那么，然后呢？ 注册之后页面里有一些注册后你可能想做的事。 </p>
 	
