@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 output=$1
 IFS=$'\n'       # make newlines the only separator

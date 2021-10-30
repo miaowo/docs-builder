@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 IFS=$'\n'       # make newlines the only separator
 set -f          # disable globbing
